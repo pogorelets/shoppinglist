@@ -11,7 +11,7 @@ import ru.helen.shoppinglist.entity.Product
  */
 @Dao
 interface ProductDao {
-    @Query("SELECT * FROM product where id = :listid")
+    @Query("SELECT * FROM product")
     fun getAllProduct(): List<Product>
 
     @Query("SELECT * FROM product where id = :listid")

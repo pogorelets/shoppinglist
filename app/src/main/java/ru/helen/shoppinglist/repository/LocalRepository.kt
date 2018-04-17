@@ -26,7 +26,7 @@ interface LocalRepository {
 
     fun deleteAllproductsInList()
 
-    fun deleteOneProductFromList(productid: Int)
+    fun deleteOneProductFromList(productid: Int, listid: Int)
 
     fun checkProduct(check: Boolean, productid: Int, listid: Int)
 
