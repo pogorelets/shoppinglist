@@ -1,5 +1,6 @@
 package ru.helen.shoppinglist.repository
 
+import io.reactivex.Single
 import ru.helen.shoppinglist.database.ShoppinglistDatabase
 import ru.helen.shoppinglist.entity.Product
 import ru.helen.shoppinglist.entity.ProductsInList
@@ -53,7 +54,7 @@ class LocalRepositoryImpl(val db: ShoppinglistDatabase ): LocalRepository {
         db?.productsInListDao().checkProduct(check,productid,listid)
     }
 
-    override fun getAllshoppingList(): List<Shoppinglist> {
+    override fun getAllshoppingList(): Single<List<Shoppinglist>> {
         return db?.shoppinglistDao().getAll()
     }
 

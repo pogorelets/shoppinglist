@@ -1,18 +1,29 @@
 package ru.helen.shoppinglist.features.main
 import android.content.Context
+import android.util.Log
 import ru.helen.shoppinglist.App
 import ru.helen.shoppinglist.database.ShoppinglistDatabase
+import ru.helen.shoppinglist.entity.Shoppinglist
 
 /**
  * Created by lenap on 19.03.2018.
  */
-class Presenter(val context: Context, val view: Contract.ViewMain) {
+class Presenter(val context: Context, val view: Contract.ViewMain): Contract.OnGetList {
+
     //TODO позже уберём зависимости с помощью dagger
-   // var db: ShoppinglistDatabase? = App.database
-   // val interactor: InteractorImpl = InteractorImpl(db!!)
+
+    val interactor: InteractorImpl = InteractorImpl(App.database!!)
 
     fun getShoppinglist(){
-       // view.updatemainlist(interactor.getAllShoppinglists())
+        interactor.getAllShoppinglists(this)
+    }
+
+    override fun onSuccessLoadedList(shoppingLists: List<Shoppinglist>) {
+        view.updatemainlist(shoppingLists)
+    }
+
+    override fun onErrorLoadedList(error: String) {
+        Log.e("ERROR",error)
     }
 
 }

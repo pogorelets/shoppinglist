@@ -1,11 +1,16 @@
 package ru.helen.shoppinglist.features.main
 
 
+import android.app.Dialog
+import android.app.DialogFragment
+import android.content.DialogInterface
 import android.os.Bundle
 import android.support.design.widget.Snackbar
+import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
+import android.view.LayoutInflater
 
 
 import kotlinx.android.synthetic.main.activity_main.*
@@ -18,6 +23,10 @@ class MainActivity : AppCompatActivity(), Contract.ViewMain {
     //TODO dagger
     lateinit var presenter: Presenter
 
+    fun createlist(){
+
+        Log.e("CREATE", "CREATE")
+    }
 
     override fun updatemainlist(shoppinglists: List<Shoppinglist>) {
         adapter.swapData(shoppinglists)
@@ -36,12 +45,37 @@ class MainActivity : AppCompatActivity(), Contract.ViewMain {
         rvMainList.layoutManager = LinearLayoutManager(this)
         rvMainList.adapter = adapter
 
-        presenter = Presenter(this,this)
+        presenter = Presenter(this, this)
         presenter.getShoppinglist()
 
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show()
+        fun showDialog() {
+            val newFragment = DialogCreateList.newInstance();
+            newFragment.show(getFragmentManager(), "dialog");
+        }
+
+
+
+        fab.setOnClickListener { view -> showDialog()
+        }
+    }
+
+    class DialogCreateList : DialogFragment() {
+
+        companion object {
+            fun newInstance(): DialogCreateList {
+                val frag = DialogCreateList()
+                return frag
+            }
+        }
+
+
+        override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+
+            return AlertDialog.Builder(activity)
+                    .setView(activity.layoutInflater.inflate(R.layout.dialog_create_list,null))
+                    .setPositiveButton(getString(R.string.create_list_button), { dialog, which -> (activity as MainActivity).createlist() })
+                    .setNegativeButton(getString(R.string.cancel_button), { dialog, which -> dismiss() })
+                    .create()
         }
     }
 

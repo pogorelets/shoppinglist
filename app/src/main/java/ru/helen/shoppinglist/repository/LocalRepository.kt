@@ -1,5 +1,6 @@
 package ru.helen.shoppinglist.repository
 
+import io.reactivex.Single
 import ru.helen.shoppinglist.entity.Product
 import ru.helen.shoppinglist.entity.ProductsInList
 import ru.helen.shoppinglist.entity.Shoppinglist
@@ -30,7 +31,7 @@ interface LocalRepository {
 
     fun checkProduct(check: Boolean, productid: Int, listid: Int)
 
-    fun getAllshoppingList(): List<Shoppinglist>
+    fun getAllshoppingList(): Single<List<Shoppinglist>>
 
     fun insertShoppingList(list: Shoppinglist)
 
