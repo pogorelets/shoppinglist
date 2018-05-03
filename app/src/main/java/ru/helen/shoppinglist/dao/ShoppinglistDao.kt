@@ -1,5 +1,6 @@
 package ru.helen.shoppinglist.dao
 
+import android.arch.lifecycle.LiveData
 import android.arch.persistence.room.Dao
 import android.arch.persistence.room.Insert
 import android.arch.persistence.room.OnConflictStrategy.REPLACE
@@ -13,7 +14,7 @@ import ru.helen.shoppinglist.entity.Shoppinglist
 @Dao
 interface ShoppinglistDao {
     @Query("SELECT * FROM shoppinglist")
-    fun getAll(): Single<List<Shoppinglist>>
+    fun getAll(): LiveData<List<Shoppinglist>>
 
     @Insert(onConflict = REPLACE)
     fun insert(list: Shoppinglist)

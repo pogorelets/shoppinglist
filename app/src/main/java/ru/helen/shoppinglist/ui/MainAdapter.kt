@@ -12,7 +12,7 @@ import java.util.*
 /**
  * Created by lenap on 19.03.2018.
  */
-class MainAdapter(val listener: Contract.ViewMain) : RecyclerView.Adapter<MainAdapter.MainHolder>() {
+class MainAdapter : RecyclerView.Adapter<MainAdapter.MainHolder>() {
 
     private var data: List<Shoppinglist> = ArrayList()
 
@@ -25,7 +25,7 @@ class MainAdapter(val listener: Contract.ViewMain) : RecyclerView.Adapter<MainAd
 
     override fun getItemCount() = data.size
 
-    override fun onBindViewHolder(holder: MainHolder, position: Int) = holder.bind(data[position], listener)
+    override fun onBindViewHolder(holder: MainHolder, position: Int) = holder.bind(data[position])
 
     fun swapData(data: List<Shoppinglist>) {
         this.data = data
@@ -33,10 +33,10 @@ class MainAdapter(val listener: Contract.ViewMain) : RecyclerView.Adapter<MainAd
     }
 
     class MainHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bind(item: Shoppinglist, listener: Contract.ViewMain) = with(itemView) {
+        fun bind(item: Shoppinglist) = with(itemView) {
             tvNameList.text = item.namelist
             setOnClickListener {
-                listener.onItemClick(item)
+               // listener.onItemClick(item)
             }
         }
     }

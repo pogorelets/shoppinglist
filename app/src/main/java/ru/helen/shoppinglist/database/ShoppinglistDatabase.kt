@@ -15,7 +15,7 @@ import ru.helen.shoppinglist.entity.Shoppinglist
 /**
  * Room database for shoppinglist
  */
-@Database(entities = [(Product::class), (ProductsInList::class), (Shoppinglist::class)], version = 1)
+@Database(entities = [Product::class, ProductsInList::class, Shoppinglist::class], version = 1)
 @TypeConverters(Converters::class)
 abstract class ShoppinglistDatabase : RoomDatabase(){
     abstract fun productDao(): ProductDao

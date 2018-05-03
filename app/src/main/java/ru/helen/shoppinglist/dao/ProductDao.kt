@@ -1,5 +1,6 @@
 package ru.helen.shoppinglist.dao
 
+import android.arch.lifecycle.LiveData
 import android.arch.persistence.room.Dao
 import android.arch.persistence.room.Insert
 import android.arch.persistence.room.OnConflictStrategy.REPLACE
@@ -12,10 +13,10 @@ import ru.helen.shoppinglist.entity.Product
 @Dao
 interface ProductDao {
     @Query("SELECT * FROM product")
-    fun getAllProduct(): List<Product>
+    fun getAllProduct(): LiveData<List<Product>>
 
     @Query("SELECT * FROM product where id = :listid")
-    fun getProductByList(listid: Int): List<Product>
+    fun getProductByList(listid: Int): LiveData<List<Product>>
 
     @Insert(onConflict = REPLACE)
     fun insert(product: Product)

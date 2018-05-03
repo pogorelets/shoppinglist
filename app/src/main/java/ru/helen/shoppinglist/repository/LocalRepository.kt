@@ -1,5 +1,6 @@
 package ru.helen.shoppinglist.repository
 
+import android.arch.lifecycle.LiveData
 import io.reactivex.Single
 import ru.helen.shoppinglist.entity.Product
 import ru.helen.shoppinglist.entity.ProductsInList
@@ -9,9 +10,9 @@ import ru.helen.shoppinglist.entity.Shoppinglist
  * Interface for repository localbd
  */
 interface LocalRepository {
-    fun getAllProduct(): List<Product>
+    fun getAllProduct(): LiveData<List<Product>>
 
-    fun getProductByList(listid: Int): List<Product>
+    fun getProductByList(listid: Int): LiveData<List<Product>>
 
     fun insertProduct(product: Product)
 
@@ -21,7 +22,7 @@ interface LocalRepository {
 
     fun updateProduct(name: String, productid: Int)
 
-    fun getAllproductsInList(): List<ProductsInList>
+    fun getAllproductsInList(): LiveData<List<ProductsInList>>
 
     fun insertProductsInList(relation: ProductsInList)
 
@@ -31,7 +32,7 @@ interface LocalRepository {
 
     fun checkProduct(check: Boolean, productid: Int, listid: Int)
 
-    fun getAllshoppingList(): Single<List<Shoppinglist>>
+    fun getAllshoppingList(): LiveData<List<Shoppinglist>>
 
     fun insertShoppingList(list: Shoppinglist)
 
