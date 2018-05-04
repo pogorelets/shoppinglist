@@ -11,6 +11,7 @@ import android.util.Log
 
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
+import ru.helen.shoppinglist.App
 import ru.helen.shoppinglist.R
 import ru.helen.shoppinglist.viewmodel.MainModel
 import ru.helen.shoppinglist.viewmodel.MainModelFactory
@@ -25,6 +26,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
+        App.instance.appComponent.inject(this)
         adapter = MainAdapter()
         rvMainList.layoutManager = LinearLayoutManager(this)
         rvMainList.adapter = adapter
