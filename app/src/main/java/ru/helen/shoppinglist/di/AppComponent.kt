@@ -1,7 +1,7 @@
 package ru.helen.shoppinglist.di
 
 import dagger.Component
-import ru.helen.shoppinglist.features.main.MainActivity
+import ru.helen.shoppinglist.ui.MainActivity
 import javax.inject.Singleton
 
 @Singleton

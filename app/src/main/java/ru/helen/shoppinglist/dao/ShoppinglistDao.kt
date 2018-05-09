@@ -13,7 +13,7 @@ import ru.helen.shoppinglist.entity.Shoppinglist
  */
 @Dao
 interface ShoppinglistDao {
-    @Query("SELECT * FROM shoppinglist")
+    @Query("select * from shoppinglist order by datecreate desc")
     fun getAll(): LiveData<List<Shoppinglist>>
 
     @Insert(onConflict = REPLACE)

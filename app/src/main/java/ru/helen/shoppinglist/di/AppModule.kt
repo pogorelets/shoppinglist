@@ -22,6 +22,7 @@ class AppModule(var context: Context) {
     @Singleton
     fun provideRoomDatabase(context: Context): ShoppinglistDatabase =
             Room.databaseBuilder(context, ShoppinglistDatabase::class.java, "shoppinglist").build()
+                  //  .allowMainThreadQueries().build()
 
     @Provides
     @Singleton

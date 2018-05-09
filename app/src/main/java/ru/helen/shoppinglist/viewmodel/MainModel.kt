@@ -13,6 +13,7 @@ class MainModel(val repository: LocalRepositoryImpl): ViewModel() {
 
     fun insert(list: Shoppinglist){
         repository.insertShoppingList(list)
+
     }
 
     fun deleteAll(){
