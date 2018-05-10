@@ -11,6 +11,10 @@ class MainModel(val repository: LocalRepositoryImpl): ViewModel() {
         return repository.getAllshoppingList()
     }
 
+    fun searchList(namelist: String): LiveData<List<Shoppinglist>>{
+        return repository.searchLists(namelist)
+    }
+
     fun insert(list: Shoppinglist){
         repository.insertShoppingList(list)
 

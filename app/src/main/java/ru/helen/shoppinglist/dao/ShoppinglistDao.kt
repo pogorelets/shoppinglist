@@ -16,15 +16,18 @@ interface ShoppinglistDao {
     @Query("select * from shoppinglist order by datecreate desc")
     fun getAll(): LiveData<List<Shoppinglist>>
 
+    @Query("select * from shoppinglist where namelist like '%' || :namelist  || '%' order by datecreate desc ")
+    fun searchLists(namelist: String): LiveData<List<Shoppinglist>>
+
     @Insert(onConflict = REPLACE)
     fun insert(list: Shoppinglist)
 
-    @Query("DELETE from shoppinglist")
+    @Query("delete from shoppinglist")
     fun deleteAll()
 
-    @Query("DELETE from shoppinglist where id = :listid")
+    @Query("delete from shoppinglist where id = :listid")
     fun deleteOneList(listid: Int)
 
-    @Query("UPDATE shoppinglist set namelist = :name where id = :listid")
+    @Query("update shoppinglist set namelist = :name where id = :listid")
     fun updateList(name: String, listid: Int)
 }

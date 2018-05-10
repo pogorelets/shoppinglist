@@ -21,6 +21,9 @@ import ru.helen.shoppinglist.viewmodel.MainModel
 import ru.helen.shoppinglist.viewmodel.MainModelFactory
 import java.util.*
 import javax.inject.Inject
+import android.support.v4.widget.SearchViewCompat.setOnQueryTextListener
+import android.support.v7.widget.SearchView
+
 
 class MainActivity : AppCompatActivity(), DialogCreateList.DialogCreateListener {
     lateinit var adapter: MainAdapter
@@ -42,22 +45,35 @@ class MainActivity : AppCompatActivity(), DialogCreateList.DialogCreateListener 
                 .get(MainModel::class.java!!)
 
         viewModel.getAll().observe(this, Observer { responce -> showLists(responce) })
-        //fab.setOnClickListener { dialogInsert().show()}
+
         fab.setOnClickListener {
             val dialog = DialogCreateList.newInstance()
             dialog.show(supportFragmentManager, "dialog")
         }
+
+        search.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextChange(newText: String?): Boolean {
+                if (newText != null){
+                    searchList(newText)
+                }
+
+                return true
+            }
+
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return true
+            }
+
+
+
+        })
+
     }
 
-//    fun dialogInsert(): Dialog {
-//        val view = this.layoutInflater.inflate(R.layout.dialog_create_list, null)
-//        return AlertDialog.Builder(this)
-//                .setView(view)
-//                .setPositiveButton(getString(R.string.create_list_button), { dialog, which ->insertList(view.nameList.text.toString())})
-//                .setNegativeButton(getString(R.string.cancel_button), { dialog, which -> dialog.dismiss() })
-//                .create()
-//
-//    }
+    fun searchList(search: String){
+        viewModel.searchList(search).observe(this, Observer { responce -> showLists(responce) })
+    }
+
 
     override fun insertList(nameList: String) {
         Completable.fromAction(Action { viewModel.insert(Shoppinglist(null, nameList, Date())) })

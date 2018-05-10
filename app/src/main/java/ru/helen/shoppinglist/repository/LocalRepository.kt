@@ -34,6 +34,8 @@ interface LocalRepository {
 
     fun getAllshoppingList(): LiveData<List<Shoppinglist>>
 
+    fun searchLists(namelist: String): LiveData<List<Shoppinglist>>
+
     fun insertShoppingList(list: Shoppinglist)
 
     fun deleteAllShopingList()

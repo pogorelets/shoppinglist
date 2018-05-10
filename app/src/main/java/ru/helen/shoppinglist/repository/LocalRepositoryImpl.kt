@@ -11,6 +11,10 @@ import ru.helen.shoppinglist.entity.Shoppinglist
  * Local repository
  */
 class LocalRepositoryImpl(val db: ShoppinglistDatabase ): LocalRepository {
+    override fun searchLists(namelist: String): LiveData<List<Shoppinglist>> {
+        return db?.shoppinglistDao().searchLists(namelist)
+    }
+
     override fun getAllProduct(): LiveData<List<Product>> {
         return db?.productDao()?.getAllProduct()
     }
