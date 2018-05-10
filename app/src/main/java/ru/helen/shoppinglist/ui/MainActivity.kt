@@ -3,6 +3,7 @@ package ru.helen.shoppinglist.ui
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
@@ -21,11 +22,12 @@ import ru.helen.shoppinglist.viewmodel.MainModel
 import ru.helen.shoppinglist.viewmodel.MainModelFactory
 import java.util.*
 import javax.inject.Inject
-import android.support.v4.widget.SearchViewCompat.setOnQueryTextListener
 import android.support.v7.widget.SearchView
+import ru.helen.shoppinglist.repository.Storage
 
 
-class MainActivity : AppCompatActivity(), DialogCreateList.DialogCreateListener {
+class MainActivity : AppCompatActivity(), DialogCreateList.DialogCreateListener, MainAdapter.ListClick {
+
     lateinit var adapter: MainAdapter
     @Inject
     lateinit var viewModelFactory: MainModelFactory
@@ -36,7 +38,7 @@ class MainActivity : AppCompatActivity(), DialogCreateList.DialogCreateListener 
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
         App.instance.appComponent.inject(this)
-        adapter = MainAdapter()
+        adapter = MainAdapter(this)
         rvMainList.layoutManager = LinearLayoutManager(this)
         rvMainList.adapter = adapter
 
@@ -90,5 +92,11 @@ class MainActivity : AppCompatActivity(), DialogCreateList.DialogCreateListener 
         }
         Log.e("SIZE", lists?.size.toString())
     }
+
+    override fun onListClick(list: Shoppinglist) {
+        Storage.currentList = list
+        startActivity(Intent(this, ProductActivity::class.java))
+    }
+
 
 }
