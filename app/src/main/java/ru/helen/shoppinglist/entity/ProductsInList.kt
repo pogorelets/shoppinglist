@@ -11,9 +11,12 @@ import android.arch.persistence.room.*
                         ForeignKey(entity = Shoppinglist::class, parentColumns = arrayOf("id"), childColumns = arrayOf("listid"))))
 data class ProductsInList(
       //  @PrimaryKey(autoGenerate = true) var id: Long?,
-        @ColumnInfo(name = "productid") var productId: Int,
-        @ColumnInfo(name = "listid") var listId: Int,
-        @ColumnInfo(name = "checking") var check: Boolean
+        @ColumnInfo(name = "productid") var productId: Long,
+        @ColumnInfo(name = "listid") var listId: Long,
+        @ColumnInfo(name = "checking") var check: Boolean,
+        //небольшое дублирование, чтобы легче было возвращать в список отмеченные товары
+        @ColumnInfo(name = "nameproduct") var nameproduct: String
+
 )
 
 

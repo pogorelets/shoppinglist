@@ -11,6 +11,4 @@ import android.arch.persistence.room.PrimaryKey
 data class Product(
         @PrimaryKey(autoGenerate = true) var id: Long?,
         @ColumnInfo(name = "nameproduct") var nameproduct: String
-)  {
-
-}
+)
