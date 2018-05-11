@@ -1,7 +1,6 @@
 package ru.helen.shoppinglist.repository
 
 import android.arch.lifecycle.LiveData
-import io.reactivex.Single
 import ru.helen.shoppinglist.entity.Product
 import ru.helen.shoppinglist.entity.ProductsInList
 import ru.helen.shoppinglist.entity.Shoppinglist
@@ -12,9 +11,7 @@ import ru.helen.shoppinglist.entity.Shoppinglist
 interface LocalRepository {
     fun getAllProduct(): LiveData<List<Product>>
 
-    fun getProductByList(listid: Int): LiveData<List<Product>>
-
-    fun insertProduct(product: Product)
+    fun insertProduct(product: Product): Long
 
     fun deleteAllproducts()
 
@@ -22,7 +19,7 @@ interface LocalRepository {
 
     fun updateProduct(name: String, productid: Int)
 
-    fun getAllproductsInList(): LiveData<List<ProductsInList>>
+    fun getAllproductsInList(id: Long?): LiveData<List<ProductsInList>>
 
     fun insertProductsInList(relation: ProductsInList)
 
@@ -43,4 +40,6 @@ interface LocalRepository {
     fun deleteOneList(listid: Int)
 
     fun updateList(name: String, listid: Int)
+
+    fun searchProduct(searchProduct: String): LiveData<List<Product>>
 }

@@ -1,4 +1,4 @@
-package ru.helen.shoppinglist.ui
+package ru.helen.shoppinglist.ui.main
 
 import android.app.AlertDialog
 import android.os.Bundle

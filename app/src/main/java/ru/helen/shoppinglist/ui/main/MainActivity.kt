@@ -1,4 +1,4 @@
-package ru.helen.shoppinglist.ui
+package ru.helen.shoppinglist.ui.main
 
 
 import android.arch.lifecycle.Observer
@@ -24,6 +24,7 @@ import java.util.*
 import javax.inject.Inject
 import android.support.v7.widget.SearchView
 import ru.helen.shoppinglist.repository.Storage
+import ru.helen.shoppinglist.ui.product.ProductActivity
 
 
 class MainActivity : AppCompatActivity(), DialogCreateList.DialogCreateListener, MainAdapter.ListClick {

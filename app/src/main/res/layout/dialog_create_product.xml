@@ -3,14 +3,4 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <android.support.design.widget.TextInputLayout
-        android:layout_marginTop="15dp"
-        android:hint="@string/input_name_product"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <android.support.design.widget.TextInputEditText
-            android:id="@+id/nameList"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-    </android.support.design.widget.TextInputLayout>
 </LinearLayout>

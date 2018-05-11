@@ -39,7 +39,7 @@ class MainAdapter(val listener: ListClick) : RecyclerView.Adapter<MainAdapter.Ma
         fun bind(item: Shoppinglist, listener: ListClick) = with(itemView) {
             tvNameList.text = item.namelist
             setOnClickListener {
-               listener.onListClick(item)
+                listener.onListClick(item)
             }
         }
     }
