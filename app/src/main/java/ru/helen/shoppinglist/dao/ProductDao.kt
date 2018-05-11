@@ -12,21 +12,24 @@ import ru.helen.shoppinglist.entity.Product
  */
 @Dao
 interface ProductDao {
-    @Query("SELECT * FROM product")
+    @Query("select * from product")
     fun getAllProduct(): LiveData<List<Product>>
 
-    @Query("SELECT * FROM product where id = :listid")
+    @Query("select * from product where id = :listid")
     fun getProductByList(listid: Int): LiveData<List<Product>>
 
     @Insert(onConflict = REPLACE)
-    fun insert(product: Product)
+    fun insert(product: Product): Long
 
-    @Query("DELETE from product")
+    @Query("delete from product")
     fun deleteAll()
 
-    @Query("DELETE from product where id = :productid")
+    @Query("delete from product where id = :productid")
     fun deleteOneProduct(productid: Int)
 
-    @Query("UPDATE product set nameproduct = :name where id = :productid")
+    @Query("update product set nameproduct = :name where id = :productid")
     fun updateProduct(name: String, productid: Int)
+
+    @Query("select * from product where nameproduct like '%' || :searchProduct  || '%'")
+    fun searchProduct(searchProduct: String): LiveData<List<Product>>
 }
