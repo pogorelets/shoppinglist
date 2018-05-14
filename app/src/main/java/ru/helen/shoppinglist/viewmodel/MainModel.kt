@@ -11,9 +11,6 @@ import ru.helen.shoppinglist.entity.Shoppinglist
 import ru.helen.shoppinglist.repository.LocalRepositoryImpl
 
 class MainModel(val repository: LocalRepositoryImpl): ViewModel() {
-    interface ShowError{
-        fun onError(error: String)
-    }
     fun getAll(): LiveData<List<Shoppinglist>>{
         return repository.getAllshoppingList()
     }

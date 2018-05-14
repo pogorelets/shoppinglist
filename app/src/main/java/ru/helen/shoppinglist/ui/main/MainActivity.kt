@@ -28,7 +28,7 @@ import ru.helen.shoppinglist.repository.Storage
 import ru.helen.shoppinglist.ui.product.ProductActivity
 
 
-class MainActivity : AppCompatActivity(), DialogCreateList.DialogCreateListener, MainAdapter.ListClick, MainModel.ShowError {
+class MainActivity : AppCompatActivity(), DialogCreateList.DialogCreateListener, MainAdapter.ListClick {
 
 
     lateinit var adapter: MainAdapter
@@ -81,7 +81,6 @@ class MainActivity : AppCompatActivity(), DialogCreateList.DialogCreateListener,
 
 
     override fun insertList(nameList: String) {
-       // viewModel.insert(Shoppinglist(null, nameList, Date()))
         Completable.fromAction(Action { viewModel.insert(Shoppinglist(null, nameList, Date())) })
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -102,9 +101,7 @@ class MainActivity : AppCompatActivity(), DialogCreateList.DialogCreateListener,
         startActivity(Intent(this, ProductActivity::class.java))
     }
 
-    override fun onError(error: String) {
-        Log.e("ERROR", error)
-    }
+
 
 
 }
