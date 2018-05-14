@@ -27,7 +27,7 @@ interface LocalRepository {
 
     fun deleteOneProductFromList(productid: Int, listid: Int)
 
-    fun checkProduct(check: Boolean, productid: Int, listid: Int)
+    fun checkProduct(check: Boolean, productid: Long, listid: Long)
 
     fun getAllshoppingList(): LiveData<List<Shoppinglist>>
 

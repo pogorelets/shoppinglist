@@ -30,7 +30,8 @@ class DialogCreateList : DialogFragment() {
                 .setView(dialogView)
                 .setPositiveButton(activity.getString(R.string.create_list_button), { dialog, which ->
                     if (dialogView.nameList.text.toString()!= ""){
-                        (activity as DialogCreateListener).insertList(dialogView.nameList.text.toString()) }
+                        (activity as DialogCreateListener).insertList(dialogView.nameList.text.toString())
+                    }
                     })
 
                 .setNegativeButton(activity.getString(R.string.cancel_button), { _, _ -> })

@@ -4,8 +4,8 @@ import android.app.AlertDialog
 import android.os.Bundle
 import android.support.v4.app.DialogFragment
 import kotlinx.android.synthetic.main.dialog_create_list.view.*
+import kotlinx.android.synthetic.main.dialog_create_product.view.*
 import ru.helen.shoppinglist.R
-import ru.helen.shoppinglist.ui.main.DialogCreateList
 
 class DialogCreateProduct: DialogFragment() {
     interface ProductListener{
@@ -14,8 +14,8 @@ class DialogCreateProduct: DialogFragment() {
     }
 
     companion object {
-        fun newInstance(): DialogCreateList {
-            val result = DialogCreateList()
+        fun newInstance(): DialogCreateProduct {
+            val result = DialogCreateProduct()
             return result
         }
 
@@ -28,7 +28,8 @@ class DialogCreateProduct: DialogFragment() {
         val dialog = AlertDialog.Builder(activity, R.style.MyDialogTheme)
                 .setView(dialogView)
                 .setPositiveButton(activity.getString(R.string.create_list_button), { dialog, which ->
-                    if (dialogView.nameList.text.toString()!= ""){
+                    if (dialogView.nameProduct.text.toString()!= ""){
+                        (activity as ProductListener).insertProduct(dialogView.nameProduct.text.toString())
                     }
                 })
 

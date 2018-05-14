@@ -24,6 +24,10 @@ class ProductModel(val repository: LocalRepositoryImpl): ViewModel() {
         return repository.searchProduct(name)
     }
 
+    fun setCheck(isChecked: Boolean, product: ProductsInList){
+        repository.checkProduct(isChecked, product.productId, product.listId)
+    }
+
     //TODO update
     //TODO delete
     //TODO deleteall

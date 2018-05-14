@@ -54,7 +54,7 @@ class LocalRepositoryImpl(val db: ShoppinglistDatabase ): LocalRepository {
         db?.productsInListDao().deleteOneProduct(productid, listid)
     }
 
-    override fun checkProduct(check: Boolean, productid: Int, listid: Int) {
+    override fun checkProduct(check: Boolean, productid: Long, listid: Long) {
         db?.productsInListDao().checkProduct(check,productid,listid)
     }
 

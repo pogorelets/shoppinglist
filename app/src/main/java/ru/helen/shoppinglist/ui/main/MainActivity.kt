@@ -23,11 +23,13 @@ import ru.helen.shoppinglist.viewmodel.MainModelFactory
 import java.util.*
 import javax.inject.Inject
 import android.support.v7.widget.SearchView
+
 import ru.helen.shoppinglist.repository.Storage
 import ru.helen.shoppinglist.ui.product.ProductActivity
 
 
-class MainActivity : AppCompatActivity(), DialogCreateList.DialogCreateListener, MainAdapter.ListClick {
+class MainActivity : AppCompatActivity(), DialogCreateList.DialogCreateListener, MainAdapter.ListClick, MainModel.ShowError {
+
 
     lateinit var adapter: MainAdapter
     @Inject
@@ -79,6 +81,7 @@ class MainActivity : AppCompatActivity(), DialogCreateList.DialogCreateListener,
 
 
     override fun insertList(nameList: String) {
+       // viewModel.insert(Shoppinglist(null, nameList, Date()))
         Completable.fromAction(Action { viewModel.insert(Shoppinglist(null, nameList, Date())) })
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -97,6 +100,10 @@ class MainActivity : AppCompatActivity(), DialogCreateList.DialogCreateListener,
     override fun onListClick(list: Shoppinglist) {
         Storage.currentList = list
         startActivity(Intent(this, ProductActivity::class.java))
+    }
+
+    override fun onError(error: String) {
+        Log.e("ERROR", error)
     }
 
 

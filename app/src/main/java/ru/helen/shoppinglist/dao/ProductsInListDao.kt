@@ -5,7 +5,6 @@ import android.arch.persistence.room.Dao
 import android.arch.persistence.room.Insert
 import android.arch.persistence.room.OnConflictStrategy.REPLACE
 import android.arch.persistence.room.Query
-import ru.helen.shoppinglist.entity.Product
 import ru.helen.shoppinglist.entity.ProductsInList
 
 /**
@@ -26,5 +25,5 @@ interface ProductsInListDao {
     fun deleteOneProduct(productid: Int, listid: Int)
 
     @Query("update productsinlist set checking = :check where productid = :productid and listid =:listid")
-    fun checkProduct(check: Boolean, productid: Int, listid: Int)
+    fun checkProduct(check: Boolean, productid: Long, listid: Long)
 }
