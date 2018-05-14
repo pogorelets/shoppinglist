@@ -4,4 +4,5 @@
     <string name="input_name_list">Введите название списка покупок.</string>
     <string name="create_list_button">Создать</string>
     <string name="cancel_button">Отмена</string>
+    <string name="name_product">Наименование покупки</string>
 </resources>
