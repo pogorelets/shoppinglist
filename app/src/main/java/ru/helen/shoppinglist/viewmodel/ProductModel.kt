@@ -33,7 +33,7 @@ class ProductModel(val repository: LocalRepositoryImpl): ViewModel() {
     }
 
     fun setCheck(isChecked: Boolean, product: ProductsInList){
-        repository.checkProduct(isChecked, product.productId, product.listId)
+        repository.setCheckProduct(isChecked, product.productId, product.listId)
     }
 
     //TODO update
