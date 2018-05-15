@@ -23,7 +23,7 @@ import ru.helen.shoppinglist.viewmodel.ProductModelFactory
 import java.util.*
 import javax.inject.Inject
 
-class ProductActivity : AppCompatActivity(), DialogCreateProduct.ProductListener, ProductAdapter.CheckListener {
+class ProductActivity : AppCompatActivity(), DialogCreateProduct.ProductListener, ProductAdapter.CheckListener, SearchProductAdapter.ClickSearchListener {
 
     lateinit var adapter: ProductAdapter
     @Inject
@@ -52,7 +52,6 @@ class ProductActivity : AppCompatActivity(), DialogCreateProduct.ProductListener
         if (products != null) {
             adapter.swapData(products)
         }
-        Log.e("SIZE", products?.size.toString())
     }
 
     override fun insertProduct(nameProduct: String) {
@@ -63,7 +62,7 @@ class ProductActivity : AppCompatActivity(), DialogCreateProduct.ProductListener
     }
 
     override fun searchProduct(search: String) {
-
+        viewModel.searchProduct(search).observe(this, Observer { responce ->  })
     }
 
     override fun onChangeCheck(isChecked: Boolean, product: ProductsInList) {
@@ -73,5 +72,10 @@ class ProductActivity : AppCompatActivity(), DialogCreateProduct.ProductListener
                 .subscribe({}, { error -> Log.e("ERROR", error.toString()) })
 
     }
+
+    override fun onSearchProductClick(item: Product) {
+
+    }
+
 
 }
