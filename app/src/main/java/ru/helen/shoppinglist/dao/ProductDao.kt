@@ -32,4 +32,7 @@ interface ProductDao {
 
     @Query("select * from product where nameproduct like '%' || :searchProduct  || '%'")
     fun searchProduct(searchProduct: String): LiveData<List<Product>>
+
+    @Query("select * from product where nameproduct like :searchProduct")
+    fun checkProduct(searchProduct: String): LiveData<List<Product>>
 }

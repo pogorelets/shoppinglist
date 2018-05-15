@@ -10,6 +10,10 @@ import ru.helen.shoppinglist.entity.Shoppinglist
  * Local repository
  */
 class LocalRepositoryImpl(val db: ShoppinglistDatabase ): LocalRepository {
+    override fun checkProduct(searchProduct: String): LiveData<List<Product>> {
+        return db?.productDao().checkProduct(searchProduct)
+    }
+
     override fun searchProduct(searchProduct: String): LiveData<List<Product>> {
         return db?.productDao().searchProduct(searchProduct)
     }

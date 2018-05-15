@@ -16,11 +16,9 @@ import ru.helen.shoppinglist.App
 import ru.helen.shoppinglist.R
 import ru.helen.shoppinglist.entity.Product
 import ru.helen.shoppinglist.entity.ProductsInList
-import ru.helen.shoppinglist.entity.Shoppinglist
 import ru.helen.shoppinglist.repository.Storage
 import ru.helen.shoppinglist.viewmodel.ProductModel
 import ru.helen.shoppinglist.viewmodel.ProductModelFactory
-import java.util.*
 import javax.inject.Inject
 
 class ProductActivity : AppCompatActivity(), DialogCreateProduct.ProductListener, ProductAdapter.CheckListener, SearchProductAdapter.ClickSearchListener {
@@ -54,7 +52,31 @@ class ProductActivity : AppCompatActivity(), DialogCreateProduct.ProductListener
         }
     }
 
-    override fun insertProduct(nameProduct: String) {
+    override fun checkProduct(nameProduct: String) {
+        viewModel.chekProduct(nameProduct).observe(this, Observer { responce ->
+            if (responce?.size == 0) {
+                insertProduct(nameProduct)
+            } else {
+                addProduct(responce?.get(0)?.id,nameProduct)
+            }
+        })
+
+
+    }
+
+    fun addProduct(id: Long?, nameProduct: String){
+        Completable.fromAction(Action {
+            if (id != null) {
+                viewModel.addProduct(id, nameProduct, Storage.currentList.id!!)
+            }
+        })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({}, { error -> Log.e("ERROR", error.toString()) })
+
+    }
+
+    fun insertProduct(nameProduct: String) {
         Completable.fromAction(Action { viewModel.insertProduct(nameProduct, Storage.currentList.id!!) })
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -62,11 +84,11 @@ class ProductActivity : AppCompatActivity(), DialogCreateProduct.ProductListener
     }
 
     override fun searchProduct(search: String) {
-        viewModel.searchProduct(search).observe(this, Observer { responce ->  })
+        viewModel.searchProduct(search).observe(this, Observer { responce -> })
     }
 
     override fun onChangeCheck(isChecked: Boolean, product: ProductsInList) {
-        Completable.fromAction(Action { viewModel.setCheck(isChecked,product) })
+        Completable.fromAction(Action { viewModel.setCheck(isChecked, product) })
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({}, { error -> Log.e("ERROR", error.toString()) })

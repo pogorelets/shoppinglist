@@ -13,11 +13,19 @@ class ProductModel(val repository: LocalRepositoryImpl): ViewModel() {
         return  repository.getAllproductsInList(Storage.currentList.id)
     }
 
-
     fun insertProduct(name: String, listid: Long){
         val productid = repository.insertProduct(Product(null,name))
         repository.insertProductsInList(ProductsInList(productid, listid, false, name))
 
+    }
+
+    fun addProduct(id: Long, nameProduct: String, listid: Long){
+        repository.insertProductsInList(ProductsInList(id, listid, false, nameProduct))
+
+    }
+
+    fun chekProduct(name: String): LiveData<List<Product>>{
+        return repository.checkProduct(name)
     }
 
     fun searchProduct(name: String): LiveData<List<Product>>{

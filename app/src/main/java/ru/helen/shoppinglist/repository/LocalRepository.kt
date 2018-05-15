@@ -42,4 +42,6 @@ interface LocalRepository {
     fun updateList(name: String, listid: Int)
 
     fun searchProduct(searchProduct: String): LiveData<List<Product>>
+
+    fun checkProduct(searchProduct: String): LiveData<List<Product>>
 }

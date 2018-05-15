@@ -8,10 +8,8 @@ import android.support.v4.app.DialogFragment
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
 import android.widget.SearchView
-import kotlinx.android.synthetic.main.dialog_create_product.*
 import kotlinx.android.synthetic.main.dialog_create_product.view.*
 import ru.helen.shoppinglist.App
 import ru.helen.shoppinglist.R
@@ -32,7 +30,7 @@ class DialogCreateProduct: DialogFragment(), SearchProductAdapter.ClickSearchLis
     }
 
     interface ProductListener{
-        fun insertProduct(nameProduct: String)
+        fun checkProduct(nameProduct: String)
         fun searchProduct(search: String)
     }
 
@@ -84,7 +82,7 @@ class DialogCreateProduct: DialogFragment(), SearchProductAdapter.ClickSearchLis
                 .setPositiveButton(activity.getString(R.string.add_button), { dialog, which ->
                     if (dialogView.searchProduct.query!= ""){
                         Log.e("query", dialogView.searchProduct.query.toString())
-                        (activity as ProductListener).insertProduct(dialogView.searchProduct.query.toString())
+                        (activity as ProductListener).checkProduct(dialogView.searchProduct.query.toString())
                     }
                 })
 
