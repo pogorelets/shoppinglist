@@ -15,6 +15,7 @@ import ru.helen.shoppinglist.App
 import ru.helen.shoppinglist.R
 import ru.helen.shoppinglist.entity.Product
 import ru.helen.shoppinglist.viewmodel.ProductModel
+import ru.helen.shoppinglist.viewmodel.SearchProductModel
 import ru.helen.shoppinglist.viewmodel.ViewModelFactory
 import javax.inject.Inject
 
@@ -23,7 +24,7 @@ class DialogCreateProduct: DialogFragment(), SearchProductAdapter.ClickSearchLis
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
-    lateinit var viewModel: ProductModel
+    lateinit var viewModel: SearchProductModel
 
     override fun onSearchProductClick(item: Product) {
         dialogView.findViewById<SearchView>(R.id.searchProduct).setQuery(item.nameproduct, true)
@@ -51,7 +52,7 @@ class DialogCreateProduct: DialogFragment(), SearchProductAdapter.ClickSearchLis
         App.instance.appComponent.inject(this)
         viewModel = ViewModelProviders
                 .of(this, viewModelFactory)
-                .get(ProductModel::class.java!!)
+                .get(SearchProductModel::class.java!!)
 
         dialogView = activity.layoutInflater.inflate(R.layout.dialog_create_product, null)
         val adapter: SearchProductAdapter = SearchProductAdapter(this)

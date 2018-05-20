@@ -20,7 +20,7 @@ class ProductModel(val repository: LocalRepositoryImpl): ViewModel() {
 
     }
 
-    fun addProduct(id: Long, nameProduct: String, listid: Long){
+    fun addProduct(id: Long,  listid: Long){
         repository.insertProductsInList(ProductsInList(id, listid, false))
 
     }

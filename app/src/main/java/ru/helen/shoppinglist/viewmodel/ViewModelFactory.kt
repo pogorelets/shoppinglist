@@ -11,6 +11,8 @@ class ViewModelFactory(val repository: LocalRepositoryImpl) : ViewModelProvider.
             return MainModel(repository) as T
         } else if (modelClass.isAssignableFrom(ProductModel::class.java)) {
             return ProductModel(repository) as T
+        } else if (modelClass.isAssignableFrom(SearchProductModel::class.java)){
+            return SearchProductModel(repository) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

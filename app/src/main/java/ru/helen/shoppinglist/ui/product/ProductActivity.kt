@@ -57,17 +57,17 @@ class ProductActivity : AppCompatActivity(), DialogCreateProduct.ProductListener
             if (responce?.size == 0) {
                 insertProduct(nameProduct)
             } else {
-                addProduct(responce?.get(0)?.id,nameProduct)
+                addProduct(responce?.get(0)?.id)
             }
         })
 
 
     }
 
-    fun addProduct(id: Long?, nameProduct: String){
+    fun addProduct(id: Long?){
         Completable.fromAction(Action {
             if (id != null) {
-                viewModel.addProduct(id, nameProduct, Storage.currentList.id!!)
+                viewModel.addProduct(id, Storage.currentList.id!!)
             }
         })
                 .subscribeOn(Schedulers.io())
