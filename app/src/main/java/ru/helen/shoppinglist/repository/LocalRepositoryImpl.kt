@@ -2,14 +2,18 @@ package ru.helen.shoppinglist.repository
 
 import android.arch.lifecycle.LiveData
 import ru.helen.shoppinglist.database.ShoppinglistDatabase
-import ru.helen.shoppinglist.entity.Product
-import ru.helen.shoppinglist.entity.ProductsInList
-import ru.helen.shoppinglist.entity.Shoppinglist
+import ru.helen.shoppinglist.entity.*
+import ru.helen.shoppinglist.model.ProductOutput
+import ru.helen.shoppinglist.model.QuantProductInList
 
 /**
  * Local repository
  */
 class LocalRepositoryImpl(val db: ShoppinglistDatabase ): LocalRepository {
+    override fun searchList(nameList: String): LiveData<List<QuantProductInList>> {
+        return db?.shoppinglistDao().searchList(nameList)
+    }
+
     override fun checkProduct(searchProduct: String): LiveData<List<Product>> {
         return db?.productDao().checkProduct(searchProduct)
     }
@@ -42,7 +46,7 @@ class LocalRepositoryImpl(val db: ShoppinglistDatabase ): LocalRepository {
         db?.productDao()?.updateProduct(name,productid)
     }
 
-    override fun getAllproductsInList(id: Long?): LiveData<List<ProductsInList>> {
+    override fun getAllproductsInList(id: Long?): LiveData<List<ProductOutput>> {
         return db?.productsInListDao().getAll(id)
     }
 
@@ -62,8 +66,8 @@ class LocalRepositoryImpl(val db: ShoppinglistDatabase ): LocalRepository {
         db?.productsInListDao().checkProduct(check,productid,listid)
     }
 
-    override fun getAllshoppingList(): LiveData<List<Shoppinglist>> {
-        return db?.shoppinglistDao().getAll()
+    override fun getAllshoppingList(): LiveData<List<QuantProductInList>> {
+        return db?.shoppinglistDao().getAllList()
     }
 
     override fun insertShoppingList(list: Shoppinglist) {

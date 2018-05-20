@@ -62,7 +62,7 @@ class DialogCreateProduct: DialogFragment(), SearchProductAdapter.ClickSearchLis
                 if (newText != null){
 
                     viewModel.searchProduct(newText).observe(activity, Observer { responce ->
-                          adapter.swapData(responce!!)})
+                        adapter.swapData(responce!!)})
                 }
 
                 return true

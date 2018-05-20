@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.item_shoppinglist.view.*
 import ru.helen.shoppinglist.R
-import ru.helen.shoppinglist.entity.Shoppinglist
+import ru.helen.shoppinglist.model.QuantProductInList
 import java.util.*
 
 /**
@@ -14,10 +14,10 @@ import java.util.*
  */
 class MainAdapter(val listener: ListClick) : RecyclerView.Adapter<MainAdapter.MainHolder>() {
     interface ListClick{
-        fun onListClick(list: Shoppinglist)
+        fun onListClick(list: QuantProductInList)
     }
 
-    private var data: List<Shoppinglist> = ArrayList()
+    private var data: List<QuantProductInList> = ArrayList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainHolder {
         return MainHolder(
@@ -30,14 +30,16 @@ class MainAdapter(val listener: ListClick) : RecyclerView.Adapter<MainAdapter.Ma
 
     override fun onBindViewHolder(holder: MainHolder, position: Int) = holder.bind(data[position],listener)
 
-    fun swapData(data: List<Shoppinglist>) {
+    fun swapData(data: List<QuantProductInList>) {
         this.data = data
         notifyDataSetChanged()
     }
 
     class MainHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bind(item: Shoppinglist, listener: ListClick) = with(itemView) {
+        fun bind(item: QuantProductInList, listener: ListClick) = with(itemView) {
             tvNameList.text = item.namelist
+            val quant = "${item.quantcheck} / ${item.quantall}"
+            tvQuant.text = quant
             setOnClickListener {
                 listener.onListClick(item)
             }

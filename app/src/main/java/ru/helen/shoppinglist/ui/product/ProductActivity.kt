@@ -15,7 +15,7 @@ import kotlinx.android.synthetic.main.content_product.*
 import ru.helen.shoppinglist.App
 import ru.helen.shoppinglist.R
 import ru.helen.shoppinglist.entity.Product
-import ru.helen.shoppinglist.entity.ProductsInList
+import ru.helen.shoppinglist.model.ProductOutput
 import ru.helen.shoppinglist.repository.Storage
 import ru.helen.shoppinglist.viewmodel.ProductModel
 import ru.helen.shoppinglist.viewmodel.ProductModelFactory
@@ -46,7 +46,7 @@ class ProductActivity : AppCompatActivity(), DialogCreateProduct.ProductListener
         }
     }
 
-    fun showProducts(products: List<ProductsInList>?) {
+    fun showProducts(products: List<ProductOutput>?) {
         if (products != null) {
             adapter.swapData(products)
         }
@@ -87,7 +87,7 @@ class ProductActivity : AppCompatActivity(), DialogCreateProduct.ProductListener
         viewModel.searchProduct(search).observe(this, Observer { responce -> })
     }
 
-    override fun onChangeCheck(isChecked: Boolean, product: ProductsInList) {
+    override fun onChangeCheck(isChecked: Boolean, product: ProductOutput) {
         Completable.fromAction(Action { viewModel.setCheck(isChecked, product) })
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

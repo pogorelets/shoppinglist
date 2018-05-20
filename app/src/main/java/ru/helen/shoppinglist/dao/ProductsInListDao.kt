@@ -5,6 +5,7 @@ import android.arch.persistence.room.Dao
 import android.arch.persistence.room.Insert
 import android.arch.persistence.room.OnConflictStrategy.REPLACE
 import android.arch.persistence.room.Query
+import ru.helen.shoppinglist.model.ProductOutput
 import ru.helen.shoppinglist.entity.ProductsInList
 
 /**
@@ -12,8 +13,9 @@ import ru.helen.shoppinglist.entity.ProductsInList
  */
 @Dao
 interface ProductsInListDao {
-    @Query("select * from productsinlist where listid = :id")
-    fun getAll(id: Long?): LiveData<List<ProductsInList>>
+
+    @Query("select p.productid as productId, p.listid as listId, p.checking, p1.nameproduct from productsinlist p join product p1 on p.productid = p1.id where listid = :id")
+    fun getAll(id: Long?): LiveData<List<ProductOutput>>
 
     @Insert(onConflict = REPLACE)
     fun insert(relation: ProductsInList)

@@ -1,9 +1,9 @@
 package ru.helen.shoppinglist.repository
 
 import android.arch.lifecycle.LiveData
-import ru.helen.shoppinglist.entity.Product
-import ru.helen.shoppinglist.entity.ProductsInList
-import ru.helen.shoppinglist.entity.Shoppinglist
+import ru.helen.shoppinglist.entity.*
+import ru.helen.shoppinglist.model.ProductOutput
+import ru.helen.shoppinglist.model.QuantProductInList
 
 /**
  * Interface for repository localbd
@@ -19,7 +19,7 @@ interface LocalRepository {
 
     fun updateProduct(name: String, productid: Int)
 
-    fun getAllproductsInList(id: Long?): LiveData<List<ProductsInList>>
+    fun getAllproductsInList(id: Long?): LiveData<List<ProductOutput>>
 
     fun insertProductsInList(relation: ProductsInList)
 
@@ -29,7 +29,7 @@ interface LocalRepository {
 
     fun setCheckProduct(check: Boolean, productid: Long, listid: Long)
 
-    fun getAllshoppingList(): LiveData<List<Shoppinglist>>
+    fun getAllshoppingList(): LiveData<List<QuantProductInList>>
 
     fun searchLists(namelist: String): LiveData<List<Shoppinglist>>
 
@@ -44,4 +44,7 @@ interface LocalRepository {
     fun searchProduct(searchProduct: String): LiveData<List<Product>>
 
     fun checkProduct(searchProduct: String): LiveData<List<Product>>
+
+    fun searchList(nameList: String): LiveData<List<QuantProductInList>>
 }
+

@@ -1,6 +1,6 @@
 package ru.helen.shoppinglist.repository
-import ru.helen.shoppinglist.entity.Shoppinglist
+import ru.helen.shoppinglist.model.QuantProductInList
 
 object Storage {
-    lateinit var currentList: Shoppinglist
+    lateinit var currentList: QuantProductInList
 }

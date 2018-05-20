@@ -6,7 +6,7 @@ import android.arch.persistence.room.Dao
 import android.arch.persistence.room.Insert
 import android.arch.persistence.room.OnConflictStrategy.REPLACE
 import android.arch.persistence.room.Query
-import io.reactivex.Single
+import ru.helen.shoppinglist.model.QuantProductInList
 import ru.helen.shoppinglist.entity.Shoppinglist
 
 /**
@@ -31,4 +31,13 @@ interface ShoppinglistDao {
 
     @Query("update shoppinglist set namelist = :name where id = :listid")
     fun updateList(name: String, listid: Int)
+
+    @Query("select s.id,s.namelist, s.datecreate, count(p.productid) as quantall, (select count(productsinlist.productid) from productsinlist where productsinlist.checking = 1 and productsinlist.listid = s.id ) as quantcheck  from shoppinglist as s left join productsinlist as p on s.id = p.listid group by  s.id,s.namelist, s.datecreate order by s.datecreate desc")
+    fun getAllList(): LiveData<List<QuantProductInList>>
+
+    @Query("select s.id,s.namelist, s.datecreate, count(p.productid) as quantall, (select count(productsinlist.productid) from productsinlist where productsinlist.checking = 1 and productsinlist.listid = s.id ) as quantcheck  from shoppinglist as s left join productsinlist as p on s.id = p.listid where s.namelist like '%' || :nameList  || '%'  group by  s.id,s.namelist, s.datecreate order by datecreate desc")
+    fun searchList(nameList: String): LiveData<List<QuantProductInList>>
+
+
+
 }

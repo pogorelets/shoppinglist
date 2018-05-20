@@ -6,15 +6,15 @@ import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.item_product.view.*
 import ru.helen.shoppinglist.R
-import ru.helen.shoppinglist.entity.ProductsInList
+import ru.helen.shoppinglist.model.ProductOutput
 
 class ProductAdapter(val listener: CheckListener) : RecyclerView.Adapter<ProductAdapter.ProductHolder>() {
     interface  CheckListener {
-        fun onChangeCheck(isChecked: Boolean, product: ProductsInList)
+        fun onChangeCheck(isChecked: Boolean, product: ProductOutput)
     }
-    private var data: List<ProductsInList> = ArrayList()
+    private var data: List<ProductOutput> = ArrayList()
 
-    fun swapData(data: List<ProductsInList>) {
+    fun swapData(data: List<ProductOutput>) {
         this.data = data
         notifyDataSetChanged()
     }
@@ -33,9 +33,9 @@ class ProductAdapter(val listener: CheckListener) : RecyclerView.Adapter<Product
     override fun onBindViewHolder(holder: ProductHolder, position: Int) = holder.bind(data[position], listener)
 
     class ProductHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bind(item: ProductsInList, listener: CheckListener) = with(itemView) {
+        fun bind(item: ProductOutput, listener: CheckListener) = with(itemView) {
             tvNameProduct.text = item.nameproduct
-            check.isChecked = item.check
+            check.isChecked = item.checking
             check.setOnCheckedChangeListener { buttonView, isChecked -> listener.onChangeCheck(check.isChecked, item) }
 
         }

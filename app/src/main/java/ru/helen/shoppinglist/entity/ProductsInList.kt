@@ -13,10 +13,7 @@ data class ProductsInList(
       //  @PrimaryKey(autoGenerate = true) var id: Long?,
         @ColumnInfo(name = "productid") var productId: Long,
         @ColumnInfo(name = "listid") var listId: Long,
-        @ColumnInfo(name = "checking") var check: Boolean,
-        //небольшое дублирование, чтобы легче было возвращать в список отмеченные товары
-        @ColumnInfo(name = "nameproduct") var nameproduct: String
-
+        @ColumnInfo(name = "checking") var checking: Boolean
 )
 
 
