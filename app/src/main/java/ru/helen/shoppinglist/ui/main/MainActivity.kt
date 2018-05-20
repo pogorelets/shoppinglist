@@ -19,7 +19,7 @@ import ru.helen.shoppinglist.R
 import ru.helen.shoppinglist.entity.Shoppinglist
 import ru.helen.shoppinglist.features.main.MainAdapter
 import ru.helen.shoppinglist.viewmodel.MainModel
-import ru.helen.shoppinglist.viewmodel.MainModelFactory
+
 import java.util.*
 import javax.inject.Inject
 import android.support.v7.widget.SearchView
@@ -27,6 +27,7 @@ import ru.helen.shoppinglist.model.QuantProductInList
 
 import ru.helen.shoppinglist.repository.Storage
 import ru.helen.shoppinglist.ui.product.ProductActivity
+import ru.helen.shoppinglist.viewmodel.ViewModelFactory
 
 
 class MainActivity : AppCompatActivity(), DialogCreateList.DialogCreateListener, MainAdapter.ListClick {
@@ -34,7 +35,7 @@ class MainActivity : AppCompatActivity(), DialogCreateList.DialogCreateListener,
 
     lateinit var adapter: MainAdapter
     @Inject
-    lateinit var viewModelFactory: MainModelFactory
+    lateinit var viewModelFactory: ViewModelFactory
     lateinit var viewModel: MainModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,7 +46,6 @@ class MainActivity : AppCompatActivity(), DialogCreateList.DialogCreateListener,
         adapter = MainAdapter(this)
         rvMainList.layoutManager = LinearLayoutManager(this)
         rvMainList.adapter = adapter
-
         viewModel = ViewModelProviders
                 .of(this, viewModelFactory)
                 .get(MainModel::class.java!!)

@@ -7,8 +7,7 @@ import dagger.Provides
 
 import ru.helen.shoppinglist.database.ShoppinglistDatabase
 import ru.helen.shoppinglist.repository.LocalRepositoryImpl
-import ru.helen.shoppinglist.viewmodel.MainModelFactory
-import ru.helen.shoppinglist.viewmodel.ProductModelFactory
+import ru.helen.shoppinglist.viewmodel.ViewModelFactory
 import javax.inject.Singleton
 
 
@@ -31,11 +30,6 @@ class AppModule(var context: Context) {
 
     @Provides
     @Singleton
-    fun provideMainModelFactory(repository: LocalRepositoryImpl) = MainModelFactory(repository)
-
-    @Provides
-    @Singleton
-    fun provideProductModelFactory(repository: LocalRepositoryImpl) = ProductModelFactory(repository)
-
+    fun provideViewModelFactory(repository: LocalRepositoryImpl) = ViewModelFactory(repository)
 
 }

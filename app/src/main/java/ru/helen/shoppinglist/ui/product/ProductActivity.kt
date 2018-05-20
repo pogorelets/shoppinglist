@@ -18,14 +18,14 @@ import ru.helen.shoppinglist.entity.Product
 import ru.helen.shoppinglist.model.ProductOutput
 import ru.helen.shoppinglist.repository.Storage
 import ru.helen.shoppinglist.viewmodel.ProductModel
-import ru.helen.shoppinglist.viewmodel.ProductModelFactory
+import ru.helen.shoppinglist.viewmodel.ViewModelFactory
 import javax.inject.Inject
 
 class ProductActivity : AppCompatActivity(), DialogCreateProduct.ProductListener, ProductAdapter.CheckListener, SearchProductAdapter.ClickSearchListener {
 
     lateinit var adapter: ProductAdapter
     @Inject
-    lateinit var viewModelFactory: ProductModelFactory
+    lateinit var viewModelFactory: ViewModelFactory
     lateinit var viewModel: ProductModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

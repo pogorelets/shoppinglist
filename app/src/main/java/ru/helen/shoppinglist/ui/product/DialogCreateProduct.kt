@@ -15,14 +15,14 @@ import ru.helen.shoppinglist.App
 import ru.helen.shoppinglist.R
 import ru.helen.shoppinglist.entity.Product
 import ru.helen.shoppinglist.viewmodel.ProductModel
-import ru.helen.shoppinglist.viewmodel.ProductModelFactory
+import ru.helen.shoppinglist.viewmodel.ViewModelFactory
 import javax.inject.Inject
 
 class DialogCreateProduct: DialogFragment(), SearchProductAdapter.ClickSearchListener {
     lateinit var dialogView:  View/*= activity.layoutInflater.inflate(R.layout.dialog_create_product, null)*/
 
     @Inject
-    lateinit var viewModelFactory: ProductModelFactory
+    lateinit var viewModelFactory: ViewModelFactory
     lateinit var viewModel: ProductModel
 
     override fun onSearchProductClick(item: Product) {
