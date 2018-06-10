@@ -6,4 +6,8 @@
     <string name="cancel_button">Отмена</string>
     <string name="add_button">Добавить</string>
     <string name="name_product">Наименование покупки</string>
+    <string name="list_share">Поделиться</string>
+    <string name="list_copy">Копировать список</string>
+    <string name="list_rename">Переименовать список</string>
+    <string name="list_delete">Удалить список</string>
 </resources>

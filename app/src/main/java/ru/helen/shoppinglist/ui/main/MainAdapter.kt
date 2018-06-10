@@ -15,6 +15,7 @@ import java.util.*
 class MainAdapter(val listener: ListClick) : RecyclerView.Adapter<MainAdapter.MainHolder>() {
     interface ListClick{
         fun onListClick(list: QuantProductInList)
+        fun onLongListClick(list: QuantProductInList)
     }
 
     private var data: List<QuantProductInList> = ArrayList()
@@ -42,6 +43,11 @@ class MainAdapter(val listener: ListClick) : RecyclerView.Adapter<MainAdapter.Ma
             tvQuant.text = quant
             setOnClickListener {
                 listener.onListClick(item)
+            }
+
+            setOnLongClickListener {
+                listener.onLongListClick(item)
+                true
             }
         }
     }

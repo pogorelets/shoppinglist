@@ -30,13 +30,27 @@ import ru.helen.shoppinglist.ui.product.ProductActivity
 import ru.helen.shoppinglist.viewmodel.ViewModelFactory
 
 
-class MainActivity : AppCompatActivity(), DialogCreateList.DialogCreateListener, MainAdapter.ListClick {
-
-
+class MainActivity : AppCompatActivity(), DialogCreateList.DialogCreateListener, MainAdapter.ListClick, DialogWorkForList.ListEventsListener {
     lateinit var adapter: MainAdapter
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
     lateinit var viewModel: MainModel
+
+    override fun onDeleteList(id: Long) {
+        Log.e("DELETE", "DELETE")
+    }
+
+    override fun onRenameList(id: Long, newName: String) {
+        Log.e("RENAME","RENAME")
+    }
+
+    override fun onCopyList(id: Long, name: String) {
+        Log.e("COPY", "COPY")
+    }
+
+    override fun onShareList() {
+        Log.e("SHARE", "SHARE")
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -102,7 +116,10 @@ class MainActivity : AppCompatActivity(), DialogCreateList.DialogCreateListener,
         startActivity(Intent(this, ProductActivity::class.java))
     }
 
-
+    override fun onLongListClick(list: QuantProductInList) {
+        val bottomSheetDialog = DialogWorkForList.newInstance(list.id,list.namelist)
+        bottomSheetDialog.show(supportFragmentManager, "Custom Bottom Sheet")
+    }
 
 
 }

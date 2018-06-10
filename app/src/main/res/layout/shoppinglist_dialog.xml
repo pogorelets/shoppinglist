@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            style="@style/TextDialogList"
+            android:id="@+id/deleteList"
+            android:drawableStart="@drawable/ic_delete"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/list_delete"
+            app:layout_constraintBottom_toTopOf="@id/editList" />
+
+        <TextView
+            style="@style/TextDialogList"
+            android:id="@+id/editList"
+            android:drawableStart="@drawable/ic_edit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/list_rename"
+            app:layout_constraintBottom_toTopOf="@id/copyList" />
+
+        <TextView
+            style="@style/TextDialogList"
+            android:id="@+id/copyList"
+            android:drawableStart="@drawable/ic_content_copy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/list_copy"
+            app:layout_constraintBottom_toTopOf="@id/shareList" />
+
+        <TextView
+            style="@style/TextDialogList"
+            android:id="@+id/shareList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_share"
+            android:text="@string/list_share"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+    </android.support.constraint.ConstraintLayout>
+
+
+</android.support.design.widget.CoordinatorLayout>
