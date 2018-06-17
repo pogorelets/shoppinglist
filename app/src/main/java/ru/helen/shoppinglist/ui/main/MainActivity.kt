@@ -30,14 +30,23 @@ import ru.helen.shoppinglist.ui.product.ProductActivity
 import ru.helen.shoppinglist.viewmodel.ViewModelFactory
 
 
-class MainActivity : AppCompatActivity(), DialogCreateList.DialogCreateListener, MainAdapter.ListClick, DialogWorkForList.ListEventsListener {
+class MainActivity : AppCompatActivity(), Contract.DialogCreateListener, Contract.ListClick, Contract.ListEventsListener, Contract.DeleteListener {
+
     lateinit var adapter: MainAdapter
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
     lateinit var viewModel: MainModel
+    lateinit var bottomSheetDialog: DialogWorkForList
 
-    override fun onDeleteList(id: Long) {
-        Log.e("DELETE", "DELETE")
+    override fun onConfirmDeleteList(id: Long) {
+        bottomSheetDialog.dismiss()
+        val confirmDeleteDialog = DialogConfirmDelete.newInstance(id)
+        confirmDeleteDialog.show(supportFragmentManager, "Confirm Delete")
+
+    }
+
+    override fun onDeleteListener(id: Long) {
+        viewModel.deleteOneList(id)
     }
 
     override fun onRenameList(id: Long, newName: String) {
@@ -94,13 +103,8 @@ class MainActivity : AppCompatActivity(), DialogCreateList.DialogCreateListener,
         viewModel.searchList(search).observe(this, Observer { responce -> showLists(responce) })
     }
 
-
     override fun insertList(nameList: String) {
-        Completable.fromAction(Action { viewModel.insert(Shoppinglist(null, nameList, Date())) })
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({}, { error -> Log.e("ERROR", error.toString()) })
-
+        viewModel.insert(Shoppinglist(null, nameList, Date()))
 
     }
 
@@ -108,7 +112,6 @@ class MainActivity : AppCompatActivity(), DialogCreateList.DialogCreateListener,
         if (lists != null) {
             adapter.swapData(lists)
         }
-        Log.e("SIZE", lists?.size.toString())
     }
 
     override fun onListClick(list: QuantProductInList) {
@@ -117,7 +120,7 @@ class MainActivity : AppCompatActivity(), DialogCreateList.DialogCreateListener,
     }
 
     override fun onLongListClick(list: QuantProductInList) {
-        val bottomSheetDialog = DialogWorkForList.newInstance(list.id,list.namelist)
+        bottomSheetDialog = DialogWorkForList.newInstance(list.id,list.namelist)
         bottomSheetDialog.show(supportFragmentManager, "Custom Bottom Sheet")
     }
 

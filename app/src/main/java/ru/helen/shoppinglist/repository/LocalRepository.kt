@@ -37,9 +37,9 @@ interface LocalRepository {
 
     fun deleteAllShopingList()
 
-    fun deleteOneList(listid: Int)
+    fun deleteOneList(listid: Long)
 
-    fun updateList(name: String, listid: Int)
+    fun updateList(name: String, listid: Long)
 
     fun searchProduct(searchProduct: String): LiveData<List<Product>>
 

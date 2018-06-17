@@ -78,11 +78,11 @@ class LocalRepositoryImpl(val db: ShoppinglistDatabase ): LocalRepository {
         db?.shoppinglistDao().deleteAll()
     }
 
-    override fun deleteOneList(listid: Int) {
+    override fun deleteOneList(listid: Long) {
         db?.shoppinglistDao().deleteOneList(listid)
     }
 
-    override fun updateList(name: String, listid: Int) {
+    override fun updateList(name: String, listid: Long) {
         db?.shoppinglistDao().updateList(name,listid)
     }
 }

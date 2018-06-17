@@ -27,10 +27,10 @@ interface ShoppinglistDao {
     fun deleteAll()
 
     @Query("delete from shoppinglist where id = :listid")
-    fun deleteOneList(listid: Int)
+    fun deleteOneList(listid: Long)
 
     @Query("update shoppinglist set namelist = :name where id = :listid")
-    fun updateList(name: String, listid: Int)
+    fun updateList(name: String, listid: Long)
 
     @Query("select s.id,s.namelist, s.datecreate, count(p.productid) as quantall, (select count(productsinlist.productid) from productsinlist where productsinlist.checking = 1 and productsinlist.listid = s.id ) as quantcheck  from shoppinglist as s left join productsinlist as p on s.id = p.listid group by  s.id,s.namelist, s.datecreate order by s.datecreate desc")
     fun getAllList(): LiveData<List<QuantProductInList>>

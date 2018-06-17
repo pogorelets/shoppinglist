@@ -7,16 +7,14 @@ import android.view.ViewGroup
 import kotlinx.android.synthetic.main.item_shoppinglist.view.*
 import ru.helen.shoppinglist.R
 import ru.helen.shoppinglist.model.QuantProductInList
+import ru.helen.shoppinglist.ui.main.Contract
 import java.util.*
 
 /**
  * Created by lenap on 19.03.2018.
  */
-class MainAdapter(val listener: ListClick) : RecyclerView.Adapter<MainAdapter.MainHolder>() {
-    interface ListClick{
-        fun onListClick(list: QuantProductInList)
-        fun onLongListClick(list: QuantProductInList)
-    }
+class MainAdapter(val listener: Contract.ListClick) : RecyclerView.Adapter<MainAdapter.MainHolder>() {
+
 
     private var data: List<QuantProductInList> = ArrayList()
 
@@ -37,7 +35,7 @@ class MainAdapter(val listener: ListClick) : RecyclerView.Adapter<MainAdapter.Ma
     }
 
     class MainHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bind(item: QuantProductInList, listener: ListClick) = with(itemView) {
+        fun bind(item: QuantProductInList, listener: Contract.ListClick) = with(itemView) {
             tvNameList.text = item.namelist
             val quant = "${item.quantcheck} / ${item.quantall}"
             tvQuant.text = quant

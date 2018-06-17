@@ -2,9 +2,14 @@ package ru.helen.shoppinglist.viewmodel
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.ViewModel
+import android.util.Log
+import io.reactivex.Completable
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import ru.helen.shoppinglist.model.QuantProductInList
 import ru.helen.shoppinglist.entity.Shoppinglist
 import ru.helen.shoppinglist.repository.LocalRepositoryImpl
+import io.reactivex.functions.Action
 
 class MainModel(val repository: LocalRepositoryImpl): ViewModel() {
     fun getAll(): LiveData<List<QuantProductInList>>{
@@ -13,22 +18,33 @@ class MainModel(val repository: LocalRepositoryImpl): ViewModel() {
 
     fun searchList(namelist: String): LiveData<List<QuantProductInList>>{
         return repository.searchList(namelist)
-        //return repository.searchLists(namelist)
     }
 
     fun insert(list: Shoppinglist){
-        repository.insertShoppingList(list)
+        Completable.fromAction(Action {repository.insertShoppingList(list) })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({}, { error -> Log.e("ERROR", error.toString()) })
+
+
     }
 
     fun deleteAll(){
         repository.deleteAllShopingList()
     }
 
-    fun deleteOneList(listid: Int){
-        repository.deleteOneList(listid)
+    fun deleteOneList(listid: Long){
+        Completable.fromAction(Action { repository.deleteOneList(listid) })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({}, { error -> Log.e("ERROR", "Ошибка при удалении списка $error" ) })
     }
 
-    fun updateList(name: String, listid: Int){
-        repository.updateList(name,listid)
+    fun updateList(name: String, listid: Long){
+        Completable.fromAction(Action { repository.updateList(name,listid) })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({}, { error -> Log.e("ERROR", "Ошибка при переименовании списка $error") })
+
     }
 }

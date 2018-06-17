@@ -10,4 +10,6 @@
     <string name="list_copy">Копировать список</string>
     <string name="list_rename">Переименовать список</string>
     <string name="list_delete">Удалить список</string>
+    <string name="do_you_delete_list">Удалить список ?</string>
+    <string name="delete_button">Удалить</string>
 </resources>

@@ -11,14 +11,7 @@ import ru.helen.shoppinglist.model.QuantProductInList
 
 
 class DialogWorkForList : BottomSheetDialogFragment() {
-    private lateinit var listener: ListEventsListener
-
-    interface ListEventsListener{
-        fun onDeleteList(id: Long)
-        fun onRenameList(id: Long, oldName: String)
-        fun onCopyList(id: Long, name: String)
-        fun onShareList()
-    }
+    private lateinit var listener: Contract.ListEventsListener
 
     companion object {
         private const val ID = "id"
@@ -29,7 +22,6 @@ class DialogWorkForList : BottomSheetDialogFragment() {
             val bundle = Bundle()
             bundle.putLong(ID, id)
             bundle.putString(NAME_LIST, nameList)
-            result.isCancelable = false
             result.arguments = bundle
             return result
 
@@ -39,10 +31,10 @@ class DialogWorkForList : BottomSheetDialogFragment() {
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,  savedInstanceState: Bundle?): View? {
         val view = inflater!!.inflate(R.layout.shoppinglist_dialog, container, false)
-        listener = activity as ListEventsListener
+        listener = activity as Contract.ListEventsListener
         val args = arguments
         view.findViewById<TextView>(R.id.deleteList).setOnClickListener {
-            listener.onDeleteList(args.getLong(ID))
+            listener.onConfirmDeleteList(args.getLong(ID))
         }
         view.findViewById<TextView>(R.id.editList).setOnClickListener {
             listener.onRenameList(args.getLong(ID), args.getString(NAME_LIST))

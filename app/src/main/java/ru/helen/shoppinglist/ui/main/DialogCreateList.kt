@@ -9,16 +9,13 @@ import kotlinx.android.synthetic.main.dialog_create_list.view.*
 import ru.helen.shoppinglist.R
 
 class DialogCreateList : DialogFragment() {
-    interface DialogCreateListener {
-        fun insertList(nameList: String)
-    }
+
 
     companion object {
         fun newInstance(): DialogCreateList {
             val result = DialogCreateList()
             return result
         }
-
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): AlertDialog {
@@ -30,7 +27,7 @@ class DialogCreateList : DialogFragment() {
                 .setView(dialogView)
                 .setPositiveButton(activity.getString(R.string.create_list_button), { dialog, which ->
                     if (dialogView.nameList.text.toString()!= ""){
-                        (activity as DialogCreateListener).insertList(dialogView.nameList.text.toString())
+                        (activity as Contract.DialogCreateListener).insertList(dialogView.nameList.text.toString())
                     }
                     })
 
@@ -46,10 +43,7 @@ class DialogCreateList : DialogFragment() {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
         })
-
         return dialog
-
-
     }
 
 }
