@@ -26,6 +26,9 @@ interface ProductsInListDao {
     @Query("delete from productsinlist where productid = :productid and listid = :listid")
     fun deleteOneProduct(productid: Int, listid: Int)
 
+    @Query("delete from productsinlist where listid = :listid")
+    fun deleteProductsInList(listid: Long)
+
     @Query("update productsinlist set checking = :check where productid = :productid and listid =:listid")
     fun checkProduct(check: Boolean, productid: Long, listid: Long)
 }
