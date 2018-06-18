@@ -12,4 +12,5 @@
     <string name="list_delete">Удалить список</string>
     <string name="do_you_delete_list">Удалить список ?</string>
     <string name="delete_button">Удалить</string>
+    <string name="save_button">Сохранить</string>
 </resources>

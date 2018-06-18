@@ -30,7 +30,7 @@ class DialogConfirmDelete : BottomSheetDialogFragment() {
             dismiss()
         }
 
-        view.findViewById<AppCompatButton>(R.id.btnDelete).setOnClickListener {
+        view.findViewById<AppCompatButton>(R.id.btnSave).setOnClickListener {
             listener.onDeleteListener(args.getLong(ID))
             dismiss()
         }

@@ -9,29 +9,34 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <TextView
-            style="@style/TextDialogList"
-            android:id="@+id/deleteLabel"
+        <android.support.design.widget.TextInputLayout
+            android:layout_marginTop="15dp"
+            android:hint="@string/input_name_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/do_you_delete_list"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:id="@+id/inputName">
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/nameList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </android.support.design.widget.TextInputLayout>
+
 
         <android.support.v7.widget.AppCompatButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/btnSave"
-            app:layout_constraintTop_toBottomOf="@id/deleteLabel"
+            app:layout_constraintTop_toBottomOf="@id/inputName"
             app:layout_constraintRight_toRightOf="parent"
-            android:text="@string/delete_button"/>
+            android:text="@string/save_button"/>
 
         <android.support.v7.widget.AppCompatButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/btnCancel"
             app:layout_constraintRight_toLeftOf="@id/btnSave"
-            app:layout_constraintTop_toBottomOf="@id/deleteLabel"
-
+            app:layout_constraintTop_toBottomOf="@id/inputName"
             android:text="@string/cancel_button"/>
 
     </android.support.constraint.ConstraintLayout>

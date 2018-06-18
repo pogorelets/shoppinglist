@@ -8,10 +8,6 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
-import io.reactivex.Completable
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.functions.Action
-import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
 import ru.helen.shoppinglist.App
@@ -30,7 +26,8 @@ import ru.helen.shoppinglist.ui.product.ProductActivity
 import ru.helen.shoppinglist.viewmodel.ViewModelFactory
 
 
-class MainActivity : AppCompatActivity(), Contract.DialogCreateListener, Contract.ListClick, Contract.ListEventsListener, Contract.DeleteListener {
+class MainActivity : AppCompatActivity(), Contract.DialogCreateListener, Contract.ListClick, Contract.ListEventsListener, Contract.DeleteListener, Contract.EditListener {
+
 
     lateinit var adapter: MainAdapter
     @Inject
@@ -49,16 +46,28 @@ class MainActivity : AppCompatActivity(), Contract.DialogCreateListener, Contrac
         viewModel.deleteOneList(id)
     }
 
-    override fun onRenameList(id: Long, newName: String) {
-        Log.e("RENAME","RENAME")
+    override fun onConfirmRenameList(id: Long, oldName: String) {
+        bottomSheetDialog.dismiss()
+        val confirmRenameDialog = DialogRenameOrCopyList.newInstance(id,oldName,"edit")
+        confirmRenameDialog.show(supportFragmentManager, "Confirm Rename")
     }
 
-    override fun onCopyList(id: Long, name: String) {
-        Log.e("COPY", "COPY")
+    override fun onConfirmCopyList(id: Long, name: String) {
+        bottomSheetDialog.dismiss()
+        val confirmCopyDialog = DialogRenameOrCopyList.newInstance(id, name,"copy")
+        confirmCopyDialog.show(supportFragmentManager,"Confirm copy")
     }
 
     override fun onShareList() {
         Log.e("SHARE", "SHARE")
+    }
+
+    override fun onRenameList(id: Long, name: String) {
+        viewModel.updateList(name,id)
+    }
+
+    override fun onCopyList(id: Long, name: String) {
+
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

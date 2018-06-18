@@ -25,13 +25,13 @@ class DialogCreateList : DialogFragment() {
 
         val dialog = AlertDialog.Builder(activity, R.style.MyDialogTheme)
                 .setView(dialogView)
-                .setPositiveButton(activity.getString(R.string.create_list_button), { dialog, which ->
+                .setPositiveButton(activity.getString(R.string.create_list_button)) { dialog, which ->
                     if (dialogView.nameList.text.toString()!= ""){
                         (activity as Contract.DialogCreateListener).insertList(dialogView.nameList.text.toString())
                     }
-                    })
+                }
 
-                .setNegativeButton(activity.getString(R.string.cancel_button), { _, _ -> })
+                .setNegativeButton(activity.getString(R.string.cancel_button)) { _, _ -> }
                 .create()
 
         // Добавляем затенение кнопки на случай, если в текстовом поле ничего не введено

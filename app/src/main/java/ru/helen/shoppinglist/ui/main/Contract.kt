@@ -17,13 +17,18 @@ class Contract {
 
     interface ListEventsListener{
         fun onConfirmDeleteList(id: Long)
-        fun onRenameList(id: Long, oldName: String)
-        fun onCopyList(id: Long, name: String)
+        fun onConfirmRenameList(id: Long, oldName: String)
+        fun onConfirmCopyList(id: Long, name: String)
         fun onShareList()
     }
 
     interface DeleteListener{
         fun onDeleteListener(id: Long)
+    }
+
+    interface EditListener{
+        fun onRenameList(id: Long, name: String)
+        fun onCopyList(id: Long, name: String)
     }
 
 }
