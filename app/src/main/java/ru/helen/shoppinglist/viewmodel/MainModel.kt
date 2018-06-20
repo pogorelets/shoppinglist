@@ -11,37 +11,46 @@ import ru.helen.shoppinglist.entity.Shoppinglist
 import ru.helen.shoppinglist.repository.LocalRepositoryImpl
 import io.reactivex.functions.Action
 
-class MainModel(val repository: LocalRepositoryImpl): ViewModel() {
-    fun getAll(): LiveData<List<QuantProductInList>>{
+class MainModel(val repository: LocalRepositoryImpl) : ViewModel() {
+    fun getAll(): LiveData<List<QuantProductInList>> {
         return repository.getAllshoppingList()
     }
 
-    fun searchList(namelist: String): LiveData<List<QuantProductInList>>{
+    fun searchList(namelist: String): LiveData<List<QuantProductInList>> {
         return repository.searchList(namelist)
     }
 
-    fun insert(list: Shoppinglist){
-        Completable.fromAction(Action {repository.insertShoppingList(list) })
+    fun insert(list: Shoppinglist) {
+        Completable.fromAction(Action { repository.insertShoppingList(list) })
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({}, { error -> Log.e("ERROR", error.toString()) })
-
-
     }
 
-    fun deleteAll(){
+    fun copyList(list: Shoppinglist, oldId: Long) {
+        Completable.fromAction(Action {
+            val newId: Long = repository.insertShoppingList(list)
+            val prodInList = repository.getProductsInList(oldId)
+            repository.copyList(prodInList, newId)
+        })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({}, { error -> Log.e("ERROR", error.toString()) })
+    }
+
+    fun deleteAll() {
         repository.deleteAllShopingList()
     }
 
-    fun deleteOneList(listid: Long){
+    fun deleteOneList(listid: Long) {
         Completable.fromAction(Action { repository.deleteOneList(listid) })
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({}, { error -> Log.e("ERROR", "Ошибка при удалении списка $error" ) })
+                .subscribe({}, { error -> Log.e("ERROR", "Ошибка при удалении списка $error") })
     }
 
-    fun updateList(name: String, listid: Long){
-        Completable.fromAction(Action { repository.updateList(name,listid) })
+    fun updateList(name: String, listid: Long) {
+        Completable.fromAction(Action { repository.updateList(name, listid) })
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({}, { error -> Log.e("ERROR", "Ошибка при переименовании списка $error") })

@@ -10,6 +10,14 @@ import ru.helen.shoppinglist.model.QuantProductInList
  * Local repository
  */
 class LocalRepositoryImpl(val db: ShoppinglistDatabase ): LocalRepository {
+
+
+    override fun copyList(products: List<ProductsInList>, newId: Long) {
+        for (product in products){
+            db.productsInListDao().insert(ProductsInList(product.productId,newId,false))
+        }
+    }
+
     override fun searchList(nameList: String): LiveData<List<QuantProductInList>> {
         return db.shoppinglistDao().searchList(nameList)
     }
@@ -70,8 +78,8 @@ class LocalRepositoryImpl(val db: ShoppinglistDatabase ): LocalRepository {
         return db.shoppinglistDao().getAllList()
     }
 
-    override fun insertShoppingList(list: Shoppinglist) {
-        db.shoppinglistDao().insert(list)
+    override fun insertShoppingList(list: Shoppinglist): Long {
+        return db.shoppinglistDao().insert(list)
     }
 
     override fun deleteAllShopingList() {
@@ -86,5 +94,9 @@ class LocalRepositoryImpl(val db: ShoppinglistDatabase ): LocalRepository {
 
     override fun updateList(name: String, listid: Long) {
         db.shoppinglistDao().updateList(name,listid)
+    }
+
+    override fun getProductsInList(id: Long): List<ProductsInList> {
+        return db.productsInListDao().getProductsInList(id)
     }
 }

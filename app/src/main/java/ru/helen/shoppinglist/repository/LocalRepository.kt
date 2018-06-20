@@ -21,6 +21,8 @@ interface LocalRepository {
 
     fun getAllproductsInList(id: Long?): LiveData<List<ProductOutput>>
 
+    fun getProductsInList(id: Long): List<ProductsInList>
+
     fun insertProductsInList(relation: ProductsInList)
 
     fun deleteAllproductsInList()
@@ -33,7 +35,7 @@ interface LocalRepository {
 
     fun searchLists(namelist: String): LiveData<List<Shoppinglist>>
 
-    fun insertShoppingList(list: Shoppinglist)
+    fun insertShoppingList(list: Shoppinglist): Long
 
     fun deleteAllShopingList()
 
@@ -46,5 +48,7 @@ interface LocalRepository {
     fun checkProduct(searchProduct: String): LiveData<List<Product>>
 
     fun searchList(nameList: String): LiveData<List<QuantProductInList>>
+
+    fun copyList(products: List<ProductsInList>, newId: Long)
 }
 

@@ -6,12 +6,11 @@ import ru.helen.shoppinglist.entity.Product
 import ru.helen.shoppinglist.model.ProductOutput
 import ru.helen.shoppinglist.entity.ProductsInList
 import ru.helen.shoppinglist.repository.LocalRepositoryImpl
-import ru.helen.shoppinglist.repository.Storage
 
 class ProductModel(val repository: LocalRepositoryImpl): ViewModel() {
 
     fun getAll(id: Long?): LiveData<List<ProductOutput>>{
-        return  repository.getAllproductsInList(Storage.currentList.id)
+        return  repository.getAllproductsInList(id)
     }
 
     fun insertProduct(name: String, listid: Long){

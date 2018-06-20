@@ -67,7 +67,7 @@ class MainActivity : AppCompatActivity(), Contract.DialogCreateListener, Contrac
     }
 
     override fun onCopyList(id: Long, name: String) {
-
+        viewModel.copyList(Shoppinglist(null,name,Date()),id)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -114,7 +114,6 @@ class MainActivity : AppCompatActivity(), Contract.DialogCreateListener, Contrac
 
     override fun insertList(nameList: String) {
         viewModel.insert(Shoppinglist(null, nameList, Date()))
-
     }
 
     fun showLists(lists: List<QuantProductInList>?) {

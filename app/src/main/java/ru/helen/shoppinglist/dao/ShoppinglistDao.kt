@@ -21,7 +21,7 @@ interface ShoppinglistDao {
     fun searchLists(namelist: String): LiveData<List<Shoppinglist>>
 
     @Insert(onConflict = REPLACE)
-    fun insert(list: Shoppinglist)
+    fun insert(list: Shoppinglist): Long
 
     @Query("delete from shoppinglist")
     fun deleteAll()

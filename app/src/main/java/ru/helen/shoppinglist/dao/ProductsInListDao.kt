@@ -17,6 +17,9 @@ interface ProductsInListDao {
     @Query("select p.productid as productId, p.listid as listId, p.checking, p1.nameproduct from productsinlist p join product p1 on p.productid = p1.id where listid = :id")
     fun getAll(id: Long?): LiveData<List<ProductOutput>>
 
+    @Query("select * from productsinlist where listid = :listid")
+    fun getProductsInList(listid: Long):List<ProductsInList>
+
     @Insert(onConflict = REPLACE)
     fun insert(relation: ProductsInList)
 
