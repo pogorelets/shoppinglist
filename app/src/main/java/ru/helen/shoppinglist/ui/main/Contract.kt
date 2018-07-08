@@ -19,7 +19,7 @@ class Contract {
         fun onConfirmDeleteList(id: Long)
         fun onConfirmRenameList(id: Long, oldName: String)
         fun onConfirmCopyList(id: Long, name: String)
-        fun onShareList()
+        fun onShareList(id: Long, name: String)
     }
 
     interface DeleteListener{

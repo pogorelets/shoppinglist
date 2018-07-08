@@ -58,8 +58,16 @@ class MainActivity : AppCompatActivity(), Contract.DialogCreateListener, Contrac
         confirmCopyDialog.show(supportFragmentManager,"Confirm copy")
     }
 
-    override fun onShareList() {
-        Log.e("SHARE", "SHARE")
+    override fun onShareList(id: Long, name: String) {
+        //TODO make file
+        //функция, которая по id выбирает все продукты и все продукты в списке, учитывая галочки
+        //собираем файл будет начинаться со слов список покупок потом имя файла
+        //с новой строки каждую покупку
+        //в конце каждой строки да/нет(куплено /не куплено), чтобы можно было делиться
+        //даже уже начатым списком
+        //TODO share file
+        //делимся через мессенжеры, которые могут отправить файл
+
     }
 
     override fun onRenameList(id: Long, name: String) {

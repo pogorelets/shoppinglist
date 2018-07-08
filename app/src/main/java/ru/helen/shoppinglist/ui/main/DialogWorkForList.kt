@@ -16,7 +16,6 @@ class DialogWorkForList : BottomSheetDialogFragment() {
     companion object {
         private const val ID = "id"
         private const val NAME_LIST = "nameList"
-        private const val FLAG = "flag"
         lateinit var list: QuantProductInList
         fun newInstance(id: Long, nameList: String): DialogWorkForList {
             val result = DialogWorkForList()
@@ -44,7 +43,7 @@ class DialogWorkForList : BottomSheetDialogFragment() {
             listener.onConfirmCopyList(args.getLong(ID), args.getString(NAME_LIST))
         }
         view.findViewById<TextView>(R.id.shareList).setOnClickListener {
-            listener.onShareList()
+            listener.onShareList(args.getLong(ID),args.getString(NAME_LIST))
         }
         return view
     }
